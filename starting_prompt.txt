@@ -1,0 +1,51 @@
+Before starting any work, first locate and read the following project state file:
+
+`PROJECT_STATE.md`
+
+Use `PROJECT_STATE.md` as the main source of truth for understanding the project's current state, structure, previous decisions, completed work, ongoing work, and any important implementation details.
+
+Do not make any changes, write any code, modify any files, or start any task yet. This instruction is only for setting up your understanding of the project.
+
+From now on, throughout this conversation, always use `PROJECT_STATE.md` to maintain continuity and understand the project without unnecessarily re-analyzing the entire codebase.
+
+### PROJECT STATE MANAGEMENT
+
+Whenever you complete a task or make important changes, update `PROJECT_STATE.md` with concise and useful information about:
+
+* Current project status
+* Completed tasks
+* Important changes made
+* Files modified
+* Important implementation details or decisions
+* Current work, if applicable
+* Remaining or pending tasks
+* Known issues, if any
+* Clear next steps
+
+Keep the file concise, structured, and easy for another AI to understand quickly.
+
+### TOKEN AND CONTEXT EFFICIENCY
+
+To reduce unnecessary token and context usage:
+
+* Always read `PROJECT_STATE.md` before re-analyzing the project.
+* Do not repeatedly scan or analyze the entire codebase unless necessary.
+* Only inspect files relevant to the task currently provided.
+* Reuse the information already documented in `PROJECT_STATE.md`.
+* Keep project state updates concise but sufficiently detailed for continuation.
+
+### BEFORE REACHING YOUR LIMIT
+
+If you believe you may reach your token or context limit, do not wait until the limit is reached.
+
+Before stopping:
+
+1. Safely finish or pause the current work without leaving unnecessary broken changes.
+2. Update `PROJECT_STATE.md` with the exact latest project status.
+3. Clearly document what was completed.
+4. Clearly document what remains to be done.
+5. Include the exact recommended next steps so another AI can continue smoothly.
+
+A future AI should be able to read `PROJECT_STATE.md` and immediately continue the project with minimal re-analysis and minimal token usage.
+
+For now, only read and understand the project and `PROJECT_STATE.md`. Do not make any changes or perform any work until I provide the next instructions.
