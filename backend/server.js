@@ -17,6 +17,8 @@ const connectDB = require('./config/db');
 // (auth, rooms, bookings, etc.). Mount them here under /api/...
 const authRoutes = require('./routes/authRoutes');
 const roomRoutes = require('./routes/roomRoutes');
+const reservationRoutes = require('./routes/reservationRoutes');
+const billRoutes = require('./routes/billRoutes');
 
 // 1) Connect to the database BEFORE we start listening, so the
 //    server never accepts requests while the DB is unreachable.
@@ -44,6 +46,19 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 //     /api/rooms/* →  room CRUD + status patch (handled in routes/roomRoutes.js)
 app.use('/api/rooms', roomRoutes);
+//     /api/reservations/* → canonical booking routes (handled in routes/reservationRoutes.js)
+app.use('/api/reservations', reservationRoutes);
+//     /api/bookings/*      → ALIAS to same router. Existing frontend
+//                            (Booking.jsx / CheckInOut.jsx) was built against
+//                            /bookings URLs; mounting the same router at both
+//                            paths means no frontend code changes are needed.
+app.use('/api/bookings', reservationRoutes);
+//     /api/bills/*         → Billing / Invoices (handled in routes/billRoutes.js)
+app.use('/api/bills', billRoutes);
+//     /api/billing/*       → ALIAS to same router. Frontend Billing.jsx calls
+//                            GET /billing/:bookingId on page load; mounting at
+//                            both paths keeps the frontend requests valid.
+app.use('/api/billing', billRoutes);
 
 // 5) Start the HTTP listener.
 //    If PORT isn't set in .env we fall back to 5000.
@@ -53,4 +68,6 @@ app.listen(PORT, () => {
   console.log(`   Health check : http://localhost:${PORT}/api/health`);
   console.log(`   Auth routes  : POST /api/auth/register, POST /api/auth/login, GET /api/auth/me`);
   console.log(`   Room routes  : CRUD /api/rooms, PATCH /api/rooms/:id/status`);
+  console.log(`   Reservations: CRUD /api/reservations (+ alias /api/bookings), GET /today, PATCH :id/{cancel,checkin,checkout}`);
+  console.log(`   Billing     : CRUD /api/bills (+ alias /api/billing), POST /, GET /reservation/:ref, GET /:bookingRef, PATCH /:id/pay`);
 });
